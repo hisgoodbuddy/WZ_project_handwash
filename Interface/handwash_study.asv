@@ -57,13 +57,18 @@ handles.output = hObject;
 
 
 %Kerry
-setappdata(0,'mainHandles',gca);
-getappdata(gca,'studyphase');
+setappdata(0  ,'mainHandles'            ,gcf);
+setappdata(gcf,'studyphase'             ,1);
+setappdata(gcf, 'fhupdate_master_status', @update_master_status);
+setappdata(gcf, 'handles', handles);
+base_folder= uigetdir; 
+setappdata(gcf,'base_folder'             ,base_folder);
+
 set(handles.pushbutton1, 'enable', 'On');
-set(handles.pushbutton1, 'enable', 'Off');
-set(handles.pushbutton1, 'enable', 'Off');
-set(handles.pushbutton1, 'enable', 'Off');
-set(handles.pushbutton1, 'enable', 'Off');
+set(handles.pushbutton2, 'enable', 'Off');
+set(handles.pushbutton3, 'enable', 'Off');
+set(handles.pushbutton4, 'enable', 'Off');
+set(handles.pushbutton5, 'enable', 'Off');
 %end
 % Update handles structure
 guidata(hObject, handles);
@@ -90,6 +95,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 %Kerry run hand wash study
+cf=pwd;
+handles.activex1.URL = [cf,'instructionVedioes\testmovie.wma'];
+handles.activex1.controls.play
 handwash_study_1;
 
 
@@ -136,36 +144,44 @@ handwash_study_3_1;
 function update_master_status
 hMaingui=getappdata(0,'mainHandles');
 studyphase=getappdata(hMaingui,'studyphase');
+handles=getappdata(hMaingui,'handles');
 if (studyphase==1)
     set(handles.pushbutton1, 'enable', 'Off');
-    set(handles.pushbutton1, 'enable', 'On');
-    set(handles.pushbutton1, 'enable', 'Off');
-    set(handles.pushbutton1, 'enable', 'Off');
-    set(handles.pushbutton1, 'enable', 'Off');
+    set(handles.pushbutton2, 'enable', 'On');
+    set(handles.pushbutton3, 'enable', 'Off');
+    set(handles.pushbutton4, 'enable', 'Off');
+    set(handles.pushbutton5, 'enable', 'Off');
     setappdata(hMaingui,'studyphase',2);
 elseif (studyphase==2)
     set(handles.pushbutton1, 'enable', 'Off');
-    set(handles.pushbutton1, 'enable', 'Off');
-    set(handles.pushbutton1, 'enable', 'On');
-    set(handles.pushbutton1, 'enable', 'Off');
-    set(handles.pushbutton1, 'enable', 'Off');
+    set(handles.pushbutton2, 'enable', 'Off');
+    set(handles.pushbutton3, 'enable', 'On');
+    set(handles.pushbutton4, 'enable', 'Off');
+    set(handles.pushbutton5, 'enable', 'Off');
     setappdata(hMaingui,'studyphase',3);
 elseif (studyphase==3)
     set(handles.pushbutton1, 'enable', 'Off');
-    set(handles.pushbutton1, 'enable', 'Off');
-    set(handles.pushbutton1, 'enable', 'Off');
-    set(handles.pushbutton1, 'enable', 'On');
-    set(handles.pushbutton1, 'enable', 'Off');
+    set(handles.pushbutton2, 'enable', 'Off');
+    set(handles.pushbutton3, 'enable', 'Off');
+    set(handles.pushbutton4, 'enable', 'On');
+    set(handles.pushbutton5, 'enable', 'Off');
     setappdata(hMaingui,'studyphase',4);
 elseif (studyphase==4)
     set(handles.pushbutton1, 'enable', 'Off');
-    set(handles.pushbutton1, 'enable', 'Off');
-    set(handles.pushbutton1, 'enable', 'Off');
-    set(handles.pushbutton1, 'enable', 'Off');
-    set(handles.pushbutton1, 'enable', 'On');
+    set(handles.pushbutton2, 'enable', 'Off');
+    set(handles.pushbutton3, 'enable', 'Off');
+    set(handles.pushbutton4, 'enable', 'Off');
+    set(handles.pushbutton5, 'enable', 'On');
     setappdata(hMaingui,'studyphase',5);
 elseif (studyphase==5)
     %finished
+    
+    
+    rmappdata(hMaingui,'studyphase');
+    rmappdata(hMaingui, 'fhupdate_master_status');
+    rmappdata(hMaingui, 'handles');
+    rmappdata(hMaingui,'base_folder' );
+    rmappdata(0  ,'mainHandles');
 end
     
 

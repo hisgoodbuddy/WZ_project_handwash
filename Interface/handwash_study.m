@@ -95,6 +95,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 %Kerry run hand wash study
+cf=pwd;
+handles.activex1.URL = [cf,'/instructionVedioes/instruction_v1.mp4'];
+handles.activex1.controls.play
 handwash_study_1;
 
 
@@ -105,6 +108,9 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 %Kerry run hand wash study
+cf=pwd;
+handles.activex1.URL = [cf,'/instructionVedioes/instruction_v2.mp4'];
+handles.activex1.controls.play
 handwash_study_2;
 
 % --- Executes on button press in pushbutton3.
@@ -114,6 +120,9 @@ function pushbutton3_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 %Kerry run hand wash study
+cf=pwd;
+handles.activex1.URL = [cf,'/instructionVedioes/instruction_v3.mp4'];
+handles.activex1.controls.play
 handwash_study_2_1;
 
 
@@ -124,6 +133,9 @@ function pushbutton4_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 %Kerry run hand wash study
+cf=pwd;
+handles.activex1.URL = [cf,'/instructionVedioes/instruction_v4.mp4'];
+handles.activex1.controls.play
 handwash_study_3_1;
 
 
@@ -135,6 +147,9 @@ function pushbutton5_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 %Kerry run hand wash study
+cf=pwd;
+handles.activex1.URL = [cf,'/instructionVedioes/instruction_v5.mp4'];
+handles.activex1.controls.play
 handwash_study_3_1;
 
 
@@ -172,6 +187,13 @@ elseif (studyphase==4)
     setappdata(hMaingui,'studyphase',5);
 elseif (studyphase==5)
     %finished
+    
+    
+    rmappdata(hMaingui,'studyphase');
+    rmappdata(hMaingui, 'fhupdate_master_status');
+    rmappdata(hMaingui, 'handles');
+    rmappdata(hMaingui,'base_folder' );
+    rmappdata(0  ,'mainHandles');
 end
     
 
