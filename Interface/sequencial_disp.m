@@ -57,7 +57,8 @@ handles.output = hObject;
 
 %----Kerry----%
     %sequential display
-    base_folder= uigetdir;   
+    hMaingui=getappdata(0,'mainHandles');
+handles.base_folder= getappdata(hMaingui,'base_folder'); 
     US_image_folder=[base_folder,'\picture_pool\US'];
     CS_image_folder=[base_folder,'\picture_pool\CS\handwash'];
     cd(base_folder);

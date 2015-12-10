@@ -64,6 +64,9 @@ setappdata(gcf, 'handles', handles);
 base_folder= uigetdir; 
 setappdata(gcf,'base_folder'             ,base_folder);
 
+cd(base_folder);
+addpath(genpath(base_folder));
+
 set(handles.pushbutton1, 'enable', 'On');
 set(handles.pushbutton2, 'enable', 'Off');
 set(handles.pushbutton3, 'enable', 'Off');
@@ -98,7 +101,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 cf=pwd;
 handles.activex1.URL = [cf,'/instructionVedioes/instruction_v1.mp4'];
 handles.activex1.controls.play
+set(handles.pushbutton1, 'enable', 'Off');
 handwash_study_1;
+
 
 
 % --- Executes on button press in pushbutton2.
@@ -111,6 +116,7 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 cf=pwd;
 handles.activex1.URL = [cf,'/instructionVedioes/instruction_v2.mp4'];
 handles.activex1.controls.play
+set(handles.pushbutton2, 'enable', 'Off');
 handwash_study_2;
 
 % --- Executes on button press in pushbutton3.
@@ -123,6 +129,7 @@ function pushbutton3_Callback(hObject, eventdata, handles)
 cf=pwd;
 handles.activex1.URL = [cf,'/instructionVedioes/instruction_v3.mp4'];
 handles.activex1.controls.play
+set(handles.pushbutton3, 'enable', 'Off');
 handwash_study_2_1;
 
 
@@ -136,6 +143,7 @@ function pushbutton4_Callback(hObject, eventdata, handles)
 cf=pwd;
 handles.activex1.URL = [cf,'/instructionVedioes/instruction_v4.mp4'];
 handles.activex1.controls.play
+set(handles.pushbutton4, 'enable', 'Off');
 handwash_study_3_1;
 
 
@@ -150,6 +158,7 @@ function pushbutton5_Callback(hObject, eventdata, handles)
 cf=pwd;
 handles.activex1.URL = [cf,'/instructionVedioes/instruction_v5.mp4'];
 handles.activex1.controls.play
+set(handles.pushbutton5, 'enable', 'Off');
 handwash_study_3_1;
 
 
@@ -157,6 +166,8 @@ function update_master_status
 hMaingui=getappdata(0,'mainHandles');
 studyphase=getappdata(hMaingui,'studyphase');
 handles=getappdata(hMaingui,'handles');
+base_folder= getappdata(hMaingui,'base_folder'); 
+cd(base_folder);
 if (studyphase==1)
     set(handles.pushbutton1, 'enable', 'Off');
     set(handles.pushbutton2, 'enable', 'On');
