@@ -74,7 +74,8 @@ handles.display_order=randperm(numel(handles.fileNames));
 handles.display_no=1;
 cd(handles.base_folder);
 
-handles.known_brand=-1*ones(length(handles.display_order),1);
+% handles.known_brand=-1*ones(length(handles.display_order),1);
+handles.known_brand=0*ones(length(handles.display_order),1); %assume all brands are unkonw. 
 handles.sld_changes=0;
 %end
 
@@ -154,7 +155,8 @@ set(handles.text1, 'Visible', 'On');
 set(handles.text2, 'Visible', 'On');
 set(handles.text3, 'Visible', 'On');
 set(handles.text4, 'Visible', 'On');
-set(handles.uipanel1, 'Visible', 'On');
+% set(handles.uipanel1, 'Visible', 'On');  %disabled selection on this, all
+% brands are assumed to be unknown. 
 
 begin=(handles.display_no==1);
 cd(handles.CS_image_folder);
