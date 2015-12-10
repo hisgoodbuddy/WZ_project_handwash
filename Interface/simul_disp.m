@@ -55,7 +55,8 @@ function simul_disp_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for simul_disp
 handles.output = hObject;
 %----Kerry----%
-base_folder= uigetdir;   
+hMaingui=getappdata(0,'mainHandles');
+handles.base_folder= getappdata(hMaingui,'base_folder'); 
 US_image_folder=[base_folder,'\picture_pool\US'];
 CS_image_folder=[base_folder,'\picture_pool\CS\handwash'];
 cd(base_folder);
@@ -97,6 +98,12 @@ for j=1:5
 
          end
 end
+
+%feed back to mainGUI
+    hMaingui=getappdata(0,'mainHandles');
+    fhupdate_master_status=getappdata(hMaingui,'fhupdate_master_status');
+    feval(fhupdate_master_status);
+    %then close
     h=msgbox('Part 2-1 completed!');
     closereq;
     return;

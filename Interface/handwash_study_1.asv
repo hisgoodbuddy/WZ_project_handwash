@@ -65,8 +65,7 @@ set(handles.uipanel1, 'Visible', 'Off');
 set(handles.radiobutton1,'Value', 0);
 set(handles.radiobutton2,'Value', 0);
 
-hMaingui=getappdata(0,'mainHandles');
-handles.base_folder= getappdata(hMaingui,'base_folder');   
+handles.base_folder= uigetdir;   
 handles.CS_image_folder=[handles.base_folder,'\picture_pool\CS\handwash'];
 cd(handles.CS_image_folder);
 dirData = dir('*.jpg');        
@@ -190,7 +189,9 @@ else
     sorted=sort(abs(valid_rank),'ascend');
     if(length(sorted)<10)
         h = errordlg('Not enougth unkonwn brands !');
-        
+        %feed back to mainGUI
+        hMaingui=getappdata(0,'mainHandles');
+        fh
         closereq;
         return;
     end
@@ -216,12 +217,8 @@ else
     filename='Results.xlsx';
     xlswrite(filename,B,sheet,xlRange);
   %--------------------------------------------------------%
-  %feed back to mainGUI
-    hMaingui=getappdata(0,'mainHandles');
-    fhupdate_master_status=getappdata(hMaingui,'fhupdate_master_status');
-    feval(fhupdate_master_status);
-    %then close
-    %notify this pahse is end
+  
+  %notify this pahse is end
     closereq;
     h=msgbox('Part 1 completed!');
     return;

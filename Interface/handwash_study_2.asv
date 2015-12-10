@@ -1,35 +1,35 @@
-function varargout = handwash_study_3_1(varargin)
-% HANDWASH_STUDY_3_1 MATLAB code for handwash_study_3_1.fig
-%      HANDWASH_STUDY_3_1, by itself, creates a new HANDWASH_STUDY_3_1 or raises the existing
+function varargout = handwash_study_2(varargin)
+% HANDWASH_STUDY_2 MATLAB code for handwash_study_2.fig
+%      HANDWASH_STUDY_2, by itself, creates a new HANDWASH_STUDY_2 or raises the existing
 %      singleton*.
 %
-%      H = HANDWASH_STUDY_3_1 returns the handle to a new HANDWASH_STUDY_3_1 or the handle to
+%      H = HANDWASH_STUDY_2 returns the handle to a new HANDWASH_STUDY_2 or the handle to
 %      the existing singleton*.
 %
-%      HANDWASH_STUDY_3_1('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in HANDWASH_STUDY_3_1.M with the given input arguments.
+%      HANDWASH_STUDY_2('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in HANDWASH_STUDY_2.M with the given input arguments.
 %
-%      HANDWASH_STUDY_3_1('Property','Value',...) creates a new HANDWASH_STUDY_3_1 or raises the
+%      HANDWASH_STUDY_2('Property','Value',...) creates a new HANDWASH_STUDY_2 or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before handwash_study_3_1_OpeningFcn gets called.  An
+%      applied to the GUI before handwash_study_2_OpeningFcn gets called.  An
 %      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to handwash_study_3_1_OpeningFcn via varargin.
+%      stop.  All inputs are passed to handwash_study_2_OpeningFcn via varargin.
 %
 %      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
 %      instance to run (singleton)".
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
-% Edit the above text to modify the response to help handwash_study_3_1
+% Edit the above text to modify the response to help handwash_study_2
 
-% Last Modified by GUIDE v2.5 08-Dec-2015 20:41:24
+% Last Modified by GUIDE v2.5 08-Dec-2015 20:25:26
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @handwash_study_3_1_OpeningFcn, ...
-                   'gui_OutputFcn',  @handwash_study_3_1_OutputFcn, ...
+                   'gui_OpeningFcn', @handwash_study_2_OpeningFcn, ...
+                   'gui_OutputFcn',  @handwash_study_2_OutputFcn, ...
                    'gui_LayoutFcn',  [] , ...
                    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
@@ -44,15 +44,15 @@ end
 % End initialization code - DO NOT EDIT
 
 
-% --- Executes just before handwash_study_3_1 is made visible.
-function handwash_study_3_1_OpeningFcn(hObject, eventdata, handles, varargin)
+% --- Executes just before handwash_study_2 is made visible.
+function handwash_study_2_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-% varargin   command line arguments to handwash_study_3_1 (see VARARGIN)
+% varargin   command line arguments to handwash_study_2 (see VARARGIN)
 
-% Choose default command line output for handwash_study_3_1
+% Choose default command line output for handwash_study_2
 handles.output = hObject;
 
 %Kerry
@@ -65,8 +65,8 @@ set(handles.slider9, 'Visible', 'Off');
 set(handles.text1, 'Visible', 'Off');
 set(handles.text10, 'Visible', 'Off');
 set(handles.text11, 'Visible', 'Off');
-set(handles.text12, 'Visible', 'Off');
 set(handles.text2, 'Visible', 'Off');
+set(handles.text12, 'Visible', 'Off');
 set(handles.text3, 'Visible', 'Off');
 set(handles.text4, 'Visible', 'Off');
 set(handles.text5, 'Visible', 'Off');
@@ -75,18 +75,11 @@ set(handles.text7, 'Visible', 'Off');
 set(handles.text8, 'Visible', 'Off');
 set(handles.text9, 'Visible', 'Off');
 
-
-
-hMaingui=getappdata(0,'mainHandles');
-handles.base_folder= getappdata(hMaingui,'base_folder');
-
-handles.CS_image_folder=[handles.base_folder,'\picture_pool\CS\handwash'];
-cd(handles.base_folder);
-[ndata, CS_img_name, alldata] =xlsread('Results.xlsx',1,'C:C');
-
-cd(handles.CS_image_folder);
+handles.base_folder= uigetdir;   
+handles.US_image_folder=[handles.base_folder,'\picture_pool\US'];
+cd(handles.US_image_folder);
 dirData = dir('*.jpg');        
-handles.fileNames = CS_img_name(2:end);
+handles.fileNames = {dirData.name};
 handles.display_order=randperm(numel(handles.fileNames));
 handles.display_no=1;
 cd(handles.base_folder);
@@ -96,12 +89,12 @@ handles.button_enable=zeros(1,6); %Use this as a flag to identify button enable 
 % Update handles structure
 guidata(hObject, handles);
 
-% UIWAIT makes handwash_study_3_1 wait for user response (see UIRESUME)
+% UIWAIT makes handwash_study_2 wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = handwash_study_3_1_OutputFcn(hObject, eventdata, handles) 
+function varargout = handwash_study_2_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -353,8 +346,8 @@ set(handles.slider9, 'Visible', 'On');
 set(handles.text1, 'Visible', 'On');
 set(handles.text10, 'Visible', 'On');
 set(handles.text11, 'Visible', 'On');
-set(handles.text12, 'Visible', 'On');
 set(handles.text2, 'Visible', 'On');
+set(handles.text12, 'Visible', 'On');
 set(handles.text3, 'Visible', 'On');
 set(handles.text4, 'Visible', 'On');
 set(handles.text5, 'Visible', 'On');
@@ -363,15 +356,16 @@ set(handles.text7, 'Visible', 'On');
 set(handles.text8, 'Visible', 'On');
 set(handles.text9, 'Visible', 'On');
 
-begin=(handles.display_no==1); 
-cd(handles.CS_image_folder);
+begin=( handles.display_no==1);
+cd(handles.US_image_folder);
 if (handles.display_no<=length(handles.display_order))
     set(handles.pushbutton1, 'String', 'Next');
     I = imread(handles.fileNames{handles.display_order(handles.display_no)});
     imagesc(I); axis equal; axis off;
     cd(handles.base_folder);
-    if(begin==1)  %first click on "Start", nothing to collect
-    else %record previous reslut
+     % collect previous result
+    if(begin) %first click, nothing to collect
+    else
         handles.rank1(handles.display_no-1)=get(handles.slider1,'Value');
         handles.rank2(handles.display_no-1)=get(handles.slider7,'Value');
         handles.rank3(handles.display_no-1)=get(handles.slider11,'Value');
@@ -385,14 +379,14 @@ if (handles.display_no<=length(handles.display_order))
 
     
 else
-    %record the last reutls
+    %get last result
     handles.rank1(handles.display_no-1)=get(handles.slider1,'Value');
     handles.rank2(handles.display_no-1)=get(handles.slider7,'Value');
     handles.rank3(handles.display_no-1)=get(handles.slider11,'Value');
     handles.rank4(handles.display_no-1)=get(handles.slider10,'Value');
     handles.rank5(handles.display_no-1)=get(handles.slider9,'Value');
     handles.rank6(handles.display_no-1)=get(handles.slider8,'Value');
-    
+        
     set(handles.pushbutton1, 'String', 'Finished');
     %notify this pahse is end
     cd(handles.base_folder);
@@ -401,19 +395,30 @@ else
     for i=1:length(handles.display_order)
         A= cat(1, A, {handles.fileNames{handles.display_order(i)}, num2str(round(handles.rank1(i))), num2str(round(handles.rank2(i))), num2str(round(handles.rank3(i))), num2str(round(handles.rank4(i))), num2str(round(handles.rank5(i))), num2str(round(handles.rank6(i)))});
     end
-    sheet = 3;
+    sheet = 2;
     xlRange = ['A','1'];
     filename='Results.xlsx';
     xlswrite(filename,A,sheet,xlRange);
-    
-    %feed back to mainGUI
+  %--------------------------------------------------------%
+  [cont_selected_idx,amus_selected_idx]=select_dat(handles.rank1,handles.rank2,handles.rank3,handles.rank4,handles.rank5,handles.rank6);
+   %-------------- wirte to xlsx file--------------------%
+    B= {'contentment dom picture ID', 'amusement dom picture ID'};
+    for i=1:length(cont_selected_idx)
+        B= cat(1, B, {handles.fileNames{handles.display_order(cont_selected_idx(i))},handles.fileNames{handles.display_order(amus_selected_idx(i))} });
+    end
+    sheet = 2;
+    xlRange = ['H','1'];
+    filename='Results.xlsx';
+    xlswrite(filename,B,sheet,xlRange);
+  %--------------------------------------------------------%
+  %feed back to mainGUI
     hMaingui=getappdata(0,'mainHandles');
     fhupdate_master_status=getappdata(hMaingui,'fhupdate_master_status');
     feval(fhupdate_master_status);
     %then close
-    h=msgbox('Part 3-1 completed!');
-    closereq;
-    return;
+  h=msgbox('Part 2 completed!');
+  closereq;
+  return;
      
 end
 

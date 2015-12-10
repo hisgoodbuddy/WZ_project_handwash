@@ -75,7 +75,8 @@ set(handles.text7, 'Visible', 'Off');
 set(handles.text8, 'Visible', 'Off');
 set(handles.text9, 'Visible', 'Off');
 
-handles.base_folder= uigetdir;   
+hMaingui=getappdata(0,'mainHandles');
+handles.base_folder= getappdata(hMaingui,'base_folder');   
 handles.US_image_folder=[handles.base_folder,'\picture_pool\US'];
 cd(handles.US_image_folder);
 dirData = dir('*.jpg');        
@@ -411,6 +412,11 @@ else
     filename='Results.xlsx';
     xlswrite(filename,B,sheet,xlRange);
   %--------------------------------------------------------%
+  %feed back to mainGUI
+    hMaingui=getappdata(0,'mainHandles');
+    fhupdate_master_status=getappdata(hMaingui,'fhupdate_master_status');
+    feval(fhupdate_master_status);
+    %then close
   h=msgbox('Part 2 completed!');
   closereq;
   return;

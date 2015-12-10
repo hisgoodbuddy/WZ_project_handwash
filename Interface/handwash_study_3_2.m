@@ -55,7 +55,8 @@ function handwash_study_3_2_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for handwash_study_3_2
 handles.output = hObject;
 %Kerry
-handles.base_folder= uigetdir;   
+hMaingui=getappdata(0,'mainHandles');
+handles.base_folder= getappdata(hMaingui,'base_folder');   
 handles.CS_image_folder=[handles.base_folder,'\picture_pool\CS\handwash'];
 cd(handles.base_folder);
 [ndata, CS_img_name, alldata] =xlsread('Results.xlsx',1,'C:C');
@@ -175,6 +176,11 @@ else
     filename='Results.xlsx';
     xlswrite(filename,A,sheet,xlRange);
     
+    %feed back to mainGUI
+    hMaingui=getappdata(0,'mainHandles');
+    fhupdate_master_status=getappdata(hMaingui,'fhupdate_master_status');
+    feval(fhupdate_master_status);
+    %then close
     h=msgbox('Part 3-2 completed!');
     closereq;
     return;
